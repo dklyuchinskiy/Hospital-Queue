@@ -15,7 +15,7 @@ void CheckInput(vector<Doctor>& global_docs, vector<Patient>& global_pats)
 	{
 		cout << "Patient id = " << x.Id() << ". List of docs: ";
 		for (auto &doc : x.ListOfDocs())
-			cout << doc.first.Id() << " ";
+			if (doc.second == false) cout << doc.first.Id() << " ";
 		cout << endl;
 	}
 #endif
@@ -41,7 +41,7 @@ void CheckResults(vector<Doctor>& global_docs, vector<Patient>& global_pats)
 	for (auto &x : global_pats)
 	{
 		cout << "Patient id = " << x.Id() << ". Full time = " << x.Full_time() << ". Doc time = " << x.Doc_time() << ". Wait time = " << x.Wait_time()
-			<< ". Docs: " << x.DocsPassed() << " of " << x.ListOfDocs().size();
+			<< ". Docs: " << x.DocsPassed() << " of " << x.DocsNeeded();
 
 		if (x.FinishStatus() == true) cout << ". Finish time = " << x.Finish_time() << ". Bus_time = " << x.Bus_time() << endl;
 		else cout << endl;
@@ -53,7 +53,7 @@ void CheckResults(vector<Doctor>& global_docs, vector<Patient>& global_pats)
 void CheckListOfDocs(vector<Patient>& global_pats)
 {
 	for (auto& x : global_pats)
-		if (x.DocsPassed() == x.ListOfDocs().size())
+		if (x.DocsPassed() == x.DocsNeeded())
 		{
 			if (!x.FinishStatus()) x.SetFinishTime();
 			x.SetCheckOut();

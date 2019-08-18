@@ -14,7 +14,9 @@ public:
 	{
 		if (lock == false)
 		{
-		    auto it = find_if(pats.begin(), pats.end(), [=](Patient& pat) { return (pat.LockStatus() == false && pat.ListOfDocs()[id].second == false); });
+		    auto it = find_if(pats.begin(), pats.end(), [=](Patient& pat)
+			{ return (pat.LockStatus() == false && pat.ListOfDocs()[id].second == false && pat.Full_time() >= pat.Start_time()); });
+
 			if (it != pats.end())
 			{
 				cur_pat = it;
